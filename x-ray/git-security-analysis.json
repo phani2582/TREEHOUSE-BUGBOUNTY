@@ -1,0 +1,349 @@
+{
+  "meta": {
+    "repo": "/home/user/TREEHOUSE-BUGBOUNTY",
+    "src_dir": "contracts",
+    "generated_at": "2026-08-01T21:26:10.481147+00:00",
+    "git_head": "0cea5cb",
+    "git_branch": "arena/019fbf18-treehouse-bugbounty",
+    "total_commits": 2,
+    "total_source_files": 79,
+    "analysis_time_ms": 145
+  },
+  "repo_shape": {
+    "classification": "squashed_import",
+    "total_commits": 2,
+    "source_touching_commits": 1,
+    "bulk_import_sha": "aee3741",
+    "date_spread_days": 1,
+    "first_commit_date": "2026-08-01",
+    "last_commit_date": "2026-08-02",
+    "signals": [
+      "~7170 source lines arrived in 1 commit (aee3741)",
+      "Only 1 commit touches source files",
+      "Date spread: 1 days",
+      "1 commits touch source files out of 2 total"
+    ]
+  },
+  "fix_candidates": [
+    {
+      "sha": "aee3741",
+      "full_sha": "aee3741eb9ac7929ebb008e2dbda0c5a1b994fb7",
+      "date": "2026-08-02",
+      "author": "MEDISETTI LAKSHMAN VENKATA PHANI",
+      "subject": "Initial commit",
+      "score": 10,
+      "reasons": [
+        "unclassified",
+        "adds runtime guards (+35/-0)",
+        "tightens access control (+150/-0)",
+        "changes token transfer logic",
+        "changes signature/auth handling",
+        "changes accounting/balance logic",
+        "spans 6 security domains (access_control, fund_flows, liquidation, oracle_price, signatures, state_machines)",
+        "very large change (>2000 source lines)"
+      ],
+      "source_files_touched": [
+        "contracts/InternalAccountingUnit.sol",
+        "contracts/NavRegistry.sol",
+        "contracts/RedemptionController.sol",
+        "contracts/TAsset.sol",
+        "contracts/TreehouseAccounting.sol",
+        "contracts/TreehouseFastlane.sol",
+        "contracts/TreehouseRedemptionV2.sol",
+        "contracts/TreehouseRouter.sol",
+        "contracts/Vault.sol",
+        "contracts/interfaces/IWETH9.sol",
+        "contracts/interfaces/aaveV3/DataTypes.sol",
+        "contracts/interfaces/aaveV3/IAaveProtocolDataProvider.sol",
+        "contracts/interfaces/aaveV3/IPoolAddressesProvider.sol",
+        "contracts/interfaces/aaveV3/IPoolV3.sol",
+        "contracts/interfaces/aaveV3/IRewardsController.sol",
+        "contracts/interfaces/aaveV3/IRewardsDistributor.sol",
+        "contracts/interfaces/gearbox/IContractsRegister.sol",
+        "contracts/interfaces/gearbox/IPoolV3.sol",
+        "contracts/interfaces/lido/IUnStEth.sol",
+        "contracts/interfaces/lido/IstETH.sol",
+        "contracts/interfaces/lido/IwstETH.sol",
+        "contracts/libs/BlacklistableUpgradeable.sol",
+        "contracts/libs/Rescuable.sol",
+        "contracts/modules/nav/NavAaveV3.sol",
+        "contracts/modules/nav/NavErc20.sol",
+        "contracts/modules/nav/NavErc20WithDebt.sol",
+        "contracts/modules/nav/NavUnStEth.sol",
+        "contracts/periphery/FastlaneFee.sol",
+        "contracts/periphery/NavHelper.sol",
+        "contracts/periphery/NavLens.sol",
+        "contracts/periphery/PnlAccounting.sol",
+        "contracts/periphery/SimpleStakingERC20.sol",
+        "contracts/proxies/SafeProxy.sol",
+        "contracts/rate-providers/ChainlinkRateProvider.sol",
+        "contracts/rate-providers/DWSTETHV3RateProvider.sol",
+        "contracts/rate-providers/FixedRateProvider.sol",
+        "contracts/rate-providers/IRateProvider.sol",
+        "contracts/rate-providers/RateProviderRegistry.sol",
+        "contracts/rate-providers/TEthExchangeRateProvider.sol",
+        "contracts/rate-providers/TEthRateProvider.sol",
+        "contracts/rate-providers/WstETHRateProvider.sol",
+        "contracts/strategy/ActionExecutor.sol",
+        "contracts/strategy/ActionRegistry.sol",
+        "contracts/strategy/Strategy.sol",
+        "contracts/strategy/StrategyExecutor.sol",
+        "contracts/strategy/StrategyStorage.sol",
+        "contracts/strategy/actions/ActionBase.sol",
+        "contracts/strategy/actions/aaveV3/AaveV3Borrow.sol",
+        "contracts/strategy/actions/aaveV3/AaveV3ClaimRewards.sol",
+        "contracts/strategy/actions/aaveV3/AaveV3Payback.sol",
+        "contracts/strategy/actions/aaveV3/AaveV3SetEMode.sol",
+        "contracts/strategy/actions/aaveV3/AaveV3Supply.sol",
+        "contracts/strategy/actions/aaveV3/AaveV3Withdraw.sol",
+        "contracts/strategy/actions/aaveV3/helpers/AaveV3Helper.sol",
+        "contracts/strategy/actions/aaveV3/helpers/MainnetAaveV3Addresses.sol",
+        "contracts/strategy/actions/checkers/AaveV3HealthFactorCheck.sol",
+        "contracts/strategy/actions/checkers/SparkHealthFactorCheck.sol",
+        "contracts/strategy/actions/gearbox/GearboxDeposit.sol",
+        "contracts/strategy/actions/gearbox/GearboxRedeem.sol",
+        "contracts/strategy/actions/gearbox/helpers/GearboxHelper.sol",
+        "contracts/strategy/actions/lido/LidoStake.sol",
+        "contracts/strategy/actions/lido/LidoUnwrap.sol",
+        "contracts/strategy/actions/lido/LidoWithdrawClaim.sol",
+        "contracts/strategy/actions/lido/LidoWithdrawStart.sol",
+        "contracts/strategy/actions/lido/LidoWrap.sol",
+        "contracts/strategy/actions/lido/helpers/LidoHelper.sol",
+        "contracts/strategy/actions/lido/helpers/MainnetLidoAddresses.sol",
+        "contracts/strategy/actions/spark/SparkBorrow.sol",
+        "contracts/strategy/actions/spark/SparkClaimRewards.sol",
+        "contracts/strategy/actions/spark/SparkPayback.sol",
+        "contracts/strategy/actions/spark/SparkSetEMode.sol",
+        "contracts/strategy/actions/spark/SparkSupply.sol",
+        "contracts/strategy/actions/spark/SparkWithdraw.sol",
+        "contracts/strategy/actions/spark/helpers/MainnetSparkAddresses.sol",
+        "contracts/strategy/actions/spark/helpers/SparkHelper.sol",
+        "contracts/strategy/actions/vault/VaultPull.sol",
+        "contracts/strategy/actions/vault/VaultSend.sol",
+        "contracts/strategy/controllers/ProtocolPoolController.sol",
+        "contracts/strategy/libs/TokenUtils.sol"
+      ],
+      "test_changed": false,
+      "lines_changed": 7170
+    },
+    {
+      "sha": "0cea5cb",
+      "full_sha": "0cea5cb5c8c3026c741b069c0543c767d223073a",
+      "date": "2026-08-01",
+      "author": "phani2582",
+      "subject": "Add comprehensive security audit for Treehouse bug bounty - critical IAU burnFrom, rescuable drain, fee rug, blacklist lock",
+      "score": 8,
+      "reasons": [
+        "explicit security language"
+      ],
+      "source_files_touched": [],
+      "test_changed": false,
+      "lines_changed": 0
+    }
+  ],
+  "dangerous_area_changes": {
+    "access_control": {
+      "commit_count": 1,
+      "files": [
+        "contracts/InternalAccountingUnit.sol",
+        "contracts/NavRegistry.sol",
+        "contracts/RedemptionController.sol",
+        "contracts/TAsset.sol",
+        "contracts/TreehouseAccounting.sol",
+        "contracts/TreehouseFastlane.sol",
+        "contracts/TreehouseRedemptionV2.sol",
+        "contracts/TreehouseRouter.sol",
+        "contracts/Vault.sol",
+        "contracts/libs/BlacklistableUpgradeable.sol",
+        "contracts/libs/Rescuable.sol",
+        "contracts/periphery/FastlaneFee.sol",
+        "contracts/periphery/NavLens.sol",
+        "contracts/periphery/PnlAccounting.sol",
+        "contracts/periphery/SimpleStakingERC20.sol",
+        "contracts/rate-providers/RateProviderRegistry.sol",
+        "contracts/strategy/ActionRegistry.sol",
+        "contracts/strategy/StrategyExecutor.sol",
+        "contracts/strategy/StrategyStorage.sol",
+        "contracts/strategy/controllers/ProtocolPoolController.sol"
+      ],
+      "commits": [
+        {
+          "sha": "aee3741",
+          "date": "2026-08-02",
+          "subject": "Initial commit"
+        }
+      ]
+    },
+    "fund_flows": {
+      "commit_count": 1,
+      "files": [
+        "contracts/RedemptionController.sol",
+        "contracts/TreehouseAccounting.sol",
+        "contracts/TreehouseFastlane.sol",
+        "contracts/TreehouseRedemptionV2.sol",
+        "contracts/TreehouseRouter.sol",
+        "contracts/Vault.sol",
+        "contracts/interfaces/IWETH9.sol",
+        "contracts/interfaces/aaveV3/DataTypes.sol",
+        "contracts/interfaces/aaveV3/IAaveProtocolDataProvider.sol",
+        "contracts/interfaces/aaveV3/IPoolV3.sol",
+        "contracts/interfaces/gearbox/IPoolV3.sol",
+        "contracts/libs/Rescuable.sol",
+        "contracts/modules/nav/NavErc20.sol",
+        "contracts/modules/nav/NavErc20WithDebt.sol",
+        "contracts/periphery/NavHelper.sol",
+        "contracts/periphery/NavLens.sol",
+        "contracts/periphery/SimpleStakingERC20.sol",
+        "contracts/strategy/ActionRegistry.sol",
+        "contracts/strategy/actions/aaveV3/AaveV3Payback.sol",
+        "contracts/strategy/actions/aaveV3/AaveV3Supply.sol",
+        "contracts/strategy/actions/aaveV3/AaveV3Withdraw.sol",
+        "contracts/strategy/actions/gearbox/GearboxDeposit.sol",
+        "contracts/strategy/actions/lido/LidoWithdrawStart.sol",
+        "contracts/strategy/actions/lido/LidoWrap.sol",
+        "contracts/strategy/actions/spark/SparkPayback.sol",
+        "contracts/strategy/actions/spark/SparkSupply.sol",
+        "contracts/strategy/actions/spark/SparkWithdraw.sol",
+        "contracts/strategy/actions/vault/VaultPull.sol",
+        "contracts/strategy/actions/vault/VaultSend.sol",
+        "contracts/strategy/libs/TokenUtils.sol"
+      ],
+      "commits": [
+        {
+          "sha": "aee3741",
+          "date": "2026-08-02",
+          "subject": "Initial commit"
+        }
+      ]
+    },
+    "oracle_price": {
+      "commit_count": 1,
+      "files": [
+        "contracts/interfaces/aaveV3/DataTypes.sol",
+        "contracts/interfaces/aaveV3/IPoolAddressesProvider.sol",
+        "contracts/interfaces/aaveV3/IPoolV3.sol",
+        "contracts/interfaces/aaveV3/IRewardsController.sol",
+        "contracts/modules/nav/NavErc20.sol",
+        "contracts/periphery/NavHelper.sol",
+        "contracts/rate-providers/ChainlinkRateProvider.sol",
+        "contracts/rate-providers/DWSTETHV3RateProvider.sol",
+        "contracts/rate-providers/TEthExchangeRateProvider.sol",
+        "contracts/rate-providers/TEthRateProvider.sol"
+      ],
+      "commits": [
+        {
+          "sha": "aee3741",
+          "date": "2026-08-02",
+          "subject": "Initial commit"
+        }
+      ]
+    },
+    "liquidation": {
+      "commit_count": 1,
+      "files": [
+        "contracts/interfaces/aaveV3/DataTypes.sol",
+        "contracts/interfaces/aaveV3/IAaveProtocolDataProvider.sol",
+        "contracts/interfaces/aaveV3/IPoolV3.sol"
+      ],
+      "commits": [
+        {
+          "sha": "aee3741",
+          "date": "2026-08-02",
+          "subject": "Initial commit"
+        }
+      ]
+    },
+    "signatures": {
+      "commit_count": 1,
+      "files": [
+        "contracts/interfaces/aaveV3/IPoolV3.sol"
+      ],
+      "commits": [
+        {
+          "sha": "aee3741",
+          "date": "2026-08-02",
+          "subject": "Initial commit"
+        }
+      ]
+    },
+    "state_machines": {
+      "commit_count": 1,
+      "files": [
+        "contracts/RedemptionController.sol",
+        "contracts/TreehouseFastlane.sol",
+        "contracts/TreehouseRedemptionV2.sol",
+        "contracts/TreehouseRouter.sol",
+        "contracts/Vault.sol",
+        "contracts/interfaces/aaveV3/DataTypes.sol",
+        "contracts/interfaces/aaveV3/IAaveProtocolDataProvider.sol",
+        "contracts/interfaces/gearbox/IContractsRegister.sol",
+        "contracts/modules/nav/NavUnStEth.sol",
+        "contracts/periphery/NavHelper.sol",
+        "contracts/periphery/PnlAccounting.sol",
+        "contracts/strategy/StrategyExecutor.sol",
+        "contracts/strategy/StrategyStorage.sol"
+      ],
+      "commits": [
+        {
+          "sha": "aee3741",
+          "date": "2026-08-02",
+          "subject": "Initial commit"
+        }
+      ]
+    }
+  },
+  "late_changes": {
+    "window_days": 30,
+    "cutoff_date": "2026-07-03",
+    "latest_commit_date": "2026-08-02",
+    "late_commits": [
+      {
+        "sha": "aee3741",
+        "date": "2026-08-02",
+        "author": "MEDISETTI LAKSHMAN VENKATA PHANI",
+        "subject": "Initial commit",
+        "source_files": [
+          "contracts/InternalAccountingUnit.sol",
+          "contracts/NavRegistry.sol",
+          "contracts/RedemptionController.sol",
+          "contracts/TAsset.sol",
+          "contracts/TreehouseAccounting.sol",
+          "contracts/TreehouseFastlane.sol",
+          "contracts/TreehouseRedemptionV2.sol",
+          "contracts/TreehouseRouter.sol",
+          "contracts/Vault.sol",
+          "contracts/interfaces/IWETH9.sol"
+        ],
+        "test_changed": false,
+        "lines_changed": 7170
+      }
+    ],
+    "source_without_test_count": 1,
+    "total_late_source_commits": 1
+  },
+  "forked_deps": {
+    "detected_libs": [],
+    "removed_submodules": []
+  },
+  "tech_debt": {
+    "total_count": 0,
+    "items": [],
+    "files_with_debt": 0,
+    "capped": false
+  },
+  "dev_patterns": {
+    "test_co_change_rate": 0.0,
+    "fix_without_test_rate": 1.0,
+    "avg_commit_size": 0.0,
+    "avg_commit_size_note": "excluding bulk import",
+    "single_developer_pct": 1.0,
+    "top_contributor": "MEDISETTI LAKSHMAN VENKATA PHANI",
+    "contributor_breakdown": [
+      {
+        "author": "MEDISETTI LAKSHMAN VENKATA PHANI",
+        "lines_added": 7170,
+        "pct": 1.0
+      }
+    ]
+  }
+}

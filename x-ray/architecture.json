@@ -1,0 +1,67 @@
+{
+  "title": "Treehouse tAsset Architecture",
+  "nodes": [
+    {"id": "user", "label": "User", "subtitle": "Depositor/Redeemer", "type": "actor", "row": 0},
+    {"id": "owner", "label": "Owner/Admin", "subtitle": "Timelock 5-day", "type": "actor", "row": 0},
+    {"id": "executor", "label": "Executor/Keeper", "subtitle": "Strategy + Accounting", "type": "actor", "row": 0},
+    {"id": "rescuer", "label": "Rescuer/Pauser", "subtitle": "Can rescue funds", "type": "actor", "row": 0},
+
+    {"id": "router", "label": "TreehouseRouter", "subtitle": "Deposit Entrypoint", "type": "protocol", "row": 1},
+    {"id": "tasset_iau", "label": "TAsset + IAU", "subtitle": "ERC4626 + Accounting Unit", "type": "protocol", "row": 1},
+    {"id": "redemption", "label": "Redemption Layer", "subtitle": "Fastlane + V2 + Fee", "type": "protocol", "row": 1},
+
+    {"id": "vault", "label": "Vault", "subtitle": "Holds wstETH", "type": "protocol", "row": 2},
+    {"id": "accounting", "label": "Accounting", "subtitle": "TreehouseAccounting + Pnl", "type": "protocol", "row": 2},
+    {"id": "redemption_ctrl", "label": "RedemptionController", "subtitle": "Outflow control", "type": "protocol", "row": 2},
+
+    {"id": "nav_registry", "label": "NavRegistry", "subtitle": "Module registry", "type": "protocol", "row": 3},
+    {"id": "nav_lens", "label": "NavLens + Helpers", "subtitle": "NAV calculation", "type": "protocol", "row": 3},
+    {"id": "rate_registry", "label": "RateProviderRegistry", "subtitle": "WstETH + Chainlink", "type": "protocol", "row": 3},
+
+    {"id": "strategy_core", "label": "Strategy System", "subtitle": "Strategy + Storage + Executor", "type": "protocol", "row": 4},
+    {"id": "action_registry", "label": "ActionRegistry", "subtitle": "Action Executor", "type": "protocol", "row": 4},
+    {"id": "actions", "label": "Actions", "subtitle": "Vault/Aave/Spark/Lido/Gearbox", "type": "protocol", "row": 4},
+
+    {"id": "external_lsts", "label": "LSTs", "subtitle": "WETH stETH wstETH", "type": "external", "row": 5},
+    {"id": "external_defi", "label": "External DeFi", "subtitle": "AaveV3 Spark Gearbox Lido", "type": "external", "row": 5},
+    {"id": "external_oracles", "label": "Oracles", "subtitle": "Chainlink + RateProviders", "type": "external", "row": 5}
+  ],
+  "edges": [
+    {"from": "user", "to": "router", "label": "deposit ETH/LST"},
+    {"from": "user", "to": "redemption", "label": "redeem tAsset"},
+    {"from": "owner", "to": "router", "label": "set cap/pause"},
+    {"from": "owner", "to": "tasset_iau", "label": "upgrade/blacklist"},
+    {"from": "executor", "to": "accounting", "label": "doAccounting"},
+    {"from": "rescuer", "to": "vault", "label": "rescue assets"},
+
+    {"from": "router", "to": "vault", "label": "transfer wstETH"},
+    {"from": "router", "to": "tasset_iau", "label": "mint IAU + deposit"},
+    {"from": "redemption", "to": "tasset_iau", "label": "burn shares"},
+    {"from": "redemption", "to": "redemption_ctrl", "label": "request redeem"},
+    {"from": "tasset_iau", "to": "vault", "label": "getUnderlying"},
+    {"from": "accounting", "to": "tasset_iau", "label": "mint/burn PNL"},
+
+    {"from": "vault", "to": "nav_lens", "label": "getAllowables"},
+    {"from": "redemption_ctrl", "to": "vault", "label": "pull underlying"},
+    {"from": "accounting", "to": "nav_lens", "label": "current NAV"},
+
+    {"from": "nav_lens", "to": "nav_registry", "label": "query Nav"},
+    {"from": "nav_registry", "to": "strategy_core", "label": "strategy NAV"},
+    {"from": "nav_registry", "to": "rate_registry", "label": "get rate"},
+    {"from": "rate_registry", "to": "external_oracles", "label": "chainlink read"},
+
+    {"from": "strategy_core", "to": "action_registry", "label": "callExecute"},
+    {"from": "action_registry", "to": "actions", "label": "delegatecall"},
+    {"from": "nav_registry", "to": "actions", "label": "nav per token"},
+
+    {"from": "actions", "to": "external_lsts", "label": "stake/unwrap"},
+    {"from": "actions", "to": "external_defi", "label": "supply/borrow"},
+    {"from": "actions", "to": "vault", "label": "pull/send"}
+  ],
+  "groups": [
+    {"label": "User Facing", "nodes": ["router", "tasset_iau", "redemption"]},
+    {"label": "Core Protocol", "nodes": ["vault", "accounting", "redemption_ctrl"]},
+    {"label": "NAV & Pricing", "nodes": ["nav_registry", "nav_lens", "rate_registry"]},
+    {"label": "Strategy Layer", "nodes": ["strategy_core", "action_registry", "actions"]}
+  ]
+}
